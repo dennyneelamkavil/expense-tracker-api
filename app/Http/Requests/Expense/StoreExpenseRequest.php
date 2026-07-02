@@ -2,28 +2,47 @@
 
 namespace App\Http\Requests\Expense;
 
-use Illuminate\Contracts\Validation\ValidationRule;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreExpenseRequest extends FormRequest
 {
     /**
-     * Determine if the user is authorized to make this request.
+     * Determine if the user is authorized.
      */
     public function authorize(): bool
     {
-        return false;
+        return true;
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Validation Rules.
      *
-     * @return array<string, ValidationRule|array<mixed>|string>
+     * @return array<string, array<int,string>|string>
      */
     public function rules(): array
     {
         return [
-            //
+            'amount' => [
+                'required',
+                'numeric',
+                'min:0.01',
+            ],
+
+            'description' => [
+                'required',
+                'string',
+                'max:1000',
+            ],
+
+            'category_id' => [
+                'required',
+                'exists:categories,id',
+            ],
+
+            'expense_date' => [
+                'required',
+                'date',
+            ],
         ];
     }
 }
