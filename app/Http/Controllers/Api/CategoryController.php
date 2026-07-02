@@ -9,7 +9,7 @@ use App\Models\Category;
 class CategoryController extends Controller
 {
     /**
-     * Display all predefined categories.
+     * Retrieve all predefined expense categories.
      */
     public function index()
     {

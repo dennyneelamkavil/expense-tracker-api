@@ -13,7 +13,12 @@ use Illuminate\Http\Request;
 class ExpenseController extends Controller
 {
     /**
-     * Display a paginated listing of the authenticated user's expenses.
+     * Get paginated expenses for the authenticated user.
+     *
+     * Supports pagination using:
+     *
+     * - page
+     * - per_page
      */
     public function index(Request $request)
     {
@@ -35,7 +40,7 @@ class ExpenseController extends Controller
     }
 
     /**
-     * Store a newly created expense.
+     * Create a new expense.
      */
     public function store(StoreExpenseRequest $request): JsonResponse
     {
@@ -55,7 +60,7 @@ class ExpenseController extends Controller
     }
 
     /**
-     * Display the specified expense.
+     * Retrieve an expense by ID.
      */
     public function show(Expense $expense): ExpenseResource
     {
@@ -67,7 +72,7 @@ class ExpenseController extends Controller
     }
 
     /**
-     * Update the specified expense.
+     * Update an existing expense.
      */
     public function update(
         UpdateExpenseRequest $request,
@@ -89,7 +94,7 @@ class ExpenseController extends Controller
     }
 
     /**
-     * Remove the specified expense.
+     * Delete an expense.
      */
     public function destroy(Expense $expense): JsonResponse
     {

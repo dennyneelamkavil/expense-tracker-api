@@ -12,7 +12,13 @@ use Illuminate\Support\Facades\DB;
 class ReportController extends Controller
 {
     /**
-     * Expense summary grouped by category.
+     * Get expense summary grouped by category.
+     *
+     * Optional filters:
+     *
+     * - from
+     * - to
+     * - category_id
      */
     public function expenseSummary(ReportFilterRequest $request): JsonResponse
     {
@@ -52,7 +58,13 @@ class ReportController extends Controller
     }
 
     /**
-     * Average daily spending.
+     * Calculate average daily spending.
+     *
+     * Optional filters:
+     *
+     * - from
+     * - to
+     * - category_id
      */
     public function averageDailySpending(
         ReportFilterRequest $request

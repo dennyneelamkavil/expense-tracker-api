@@ -14,6 +14,8 @@ class AuthController extends Controller
 {
     /**
      * Register a new user.
+     *
+     * Creates a new user account and returns an access token.
      */
     public function register(RegisterRequest $request): JsonResponse
     {
@@ -33,6 +35,8 @@ class AuthController extends Controller
 
     /**
      * Authenticate a user.
+     *
+     * Returns a Sanctum access token on successful authentication.
      */
     public function login(LoginRequest $request): JsonResponse
     {
@@ -60,6 +64,8 @@ class AuthController extends Controller
 
     /**
      * Logout the authenticated user.
+     *
+     * Revokes the current access token.
      */
     public function logout(): JsonResponse
     {
@@ -79,7 +85,7 @@ class AuthController extends Controller
     }
 
     /**
-     * Get the authenticated user.
+     * Get the authenticated user's profile.
      */
     public function me(): JsonResponse
     {
