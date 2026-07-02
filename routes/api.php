@@ -35,8 +35,14 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource('expenses', ExpenseController::class);
 
     Route::prefix('reports')->group(function () {
-        Route::get('/category-summary', [ReportController::class, 'categorySummary']);
-        Route::get('/daily-average', [ReportController::class, 'dailyAverage']);
-        Route::get('/user-category-summary', [ReportController::class, 'userCategorySummary']);
+        Route::get(
+            '/expense-summary',
+            [ReportController::class, 'expenseSummary']
+        );
+
+        Route::get(
+            '/average-daily-spending',
+            [ReportController::class, 'averageDailySpending']
+        );
     });
 });
