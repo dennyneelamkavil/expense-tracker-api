@@ -125,6 +125,29 @@ Stores expense records belonging to users.
 
 ---
 
+## Design Decisions
+
+### Why is `amount` stored as DECIMAL instead of FLOAT?
+
+Although the challenge specifies a float value for the expense amount, the database uses `DECIMAL(10,2)`.
+
+This avoids floating-point precision issues when storing monetary values and is the recommended approach for financial data.
+
+### Why are `categories` stored in a separate table?
+
+The challenge mentions predefined categories.
+
+Instead of hardcoding category names inside the application, categories are stored in a dedicated table and seeded during database setup.
+
+Benefits:
+
+- Maintains referential integrity
+- Avoids duplicated category names
+- Makes future category management easier
+- Allows reports to efficiently group expenses by category
+
+---
+
 ## API Endpoints
 
 | Module         | Endpoints                               |
