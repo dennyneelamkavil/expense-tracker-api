@@ -1,58 +1,261 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# Expense Tracker API
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+A RESTful Expense Tracker API built with Laravel 13 that enables users to securely manage expenses, organize them into predefined categories, and generate filtered expense reports. The project was developed as part of a backend hiring challenge with a focus on clean architecture, authentication, authorization, validation, and RESTful API design.
 
-## About Laravel
+---
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+## Features
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+### Authentication
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+- User Registration
+- User Login
+- User Logout
+- Retrieve Authenticated User Profile
+- Laravel Sanctum Token Authentication
 
-## Learning Laravel
+### Expense Management
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+- Create Expense
+- View Expenses
+- Update Expense
+- Delete Expense
+- Pagination Support
+- Category Association
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+### Categories
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+- Predefined Categories
+- Database Seeding
+- Read-only Category API
 
-## Agentic Development
+### Reports
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+- Expense Summary grouped by Category
+- Average Daily Spending
+- Flexible Filtering
+    - Date Range
+    - Category
 
-```bash
-composer require laravel/boost --dev
+### API
 
-php artisan boost:install
+- RESTful Design
+- JSON Responses
+- Proper HTTP Status Codes
+- Consistent Error Handling
+- Interactive API Documentation using Scramble
+
+---
+
+## Tech Stack
+
+- PHP 8.3
+- Laravel 13
+- Laravel Sanctum
+- MySQL
+- Scramble API Documentation
+
+---
+
+## Architecture
+
+The project follows a RESTful API-only architecture.
+
+The API is organized into:
+
+- Controllers
+- Form Requests
+- API Resources
+- Policies
+- Eloquent Models
+- Database Seeders
+
+The application follows Laravel conventions by using Form Requests for validation, Policies for authorization, API Resources for response transformation, and Route Model Binding for clean controller logic.
+
+---
+
+## Project Structure
+
+```
+app
+├── Http
+│   ├── Controllers
+│   ├── Requests
+│   └── Resources
+├── Models
+├── Policies
+database
+├── migrations
+├── seeders
+routes
+└── api.php
 ```
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+---
 
-## Contributing
+## Database Design
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+```
+Users
+   │
+   │ 1
+   │
+   ├───────────────∞ Expenses
+                    │
+                    │
+                    │ ∞
+                    │
+                    1
+                Categories
+```
 
-## Code of Conduct
+### Tables
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+#### Users
 
-## Security Vulnerabilities
+Stores authenticated users.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+#### Categories
 
-## License
+Stores predefined expense categories.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+#### Expenses
+
+Stores expense records belonging to users.
+
+---
+
+## API Endpoints
+
+| Module         | Endpoints                               |
+| -------------- | --------------------------------------- |
+| Authentication | Register, Login, Logout, Profile        |
+| Categories     | List Categories                         |
+| Expenses       | CRUD Operations                         |
+| Reports        | Expense Summary, Average Daily Spending |
+
+Detailed API documentation is available via Scramble.
+
+---
+
+## Authentication
+
+Authentication is implemented using Laravel Sanctum.
+
+Protected endpoints require the following header:
+
+```text
+Authorization: Bearer <access_token>
+```
+
+---
+
+## Installation
+
+Clone the repository
+
+```bash
+git clone https://github.com/dennyneelamkavil/expense-tracker-api.git
+
+cd expense-tracker-api
+```
+
+Install dependencies
+
+```bash
+composer install
+```
+
+Copy environment
+
+```bash
+cp .env.example .env
+```
+
+Generate application key
+
+```bash
+php artisan key:generate
+```
+
+Configure database credentials inside `.env`.
+
+Run migrations and seeders
+
+```bash
+php artisan migrate --seed
+```
+
+Start the server
+
+```bash
+php artisan serve
+```
+
+---
+
+## API Documentation
+
+![Scramble API Documentation](images/scramble-docs.png)
+
+Interactive API documentation is generated using Scramble.
+
+After running the project, open:
+
+```text
+http://localhost:8000/docs/api
+```
+
+---
+
+## Postman Collection
+
+![Postman Collection](images/postman.png)
+
+A Postman collection is included under the `postman/` directory for testing all API endpoints.
+
+### Import the collection
+
+Import the following collection:
+
+```text
+postman/Expense Tracker API.postman_collection.json
+```
+
+### Configure the collection
+
+Set the collection variable:
+
+```text
+base_url=http://localhost:8000/api
+```
+
+### Authenticate
+
+1. Run the **Register** request to create a new user, or use the **Login** request if you already have an account.
+2. Copy the `access_token` from the response.
+3. Save the token as a Postman Vault secret named `token` (used as `{{vault:token}}` by the collection).
+
+Once the `base_url` variable and `token` Vault secret are configured, all authenticated requests in the collection can be executed without additional changes.
+
+---
+
+## Testing
+
+The API was tested using:
+
+- Postman
+- Scramble Interactive Documentation
+
+Validation, authentication, authorization, pagination, and reporting endpoints were verified manually.
+
+---
+
+## Future Improvements
+
+- Category Management (Create, Update, Delete)
+- Admin Reporting Dashboard
+- Export Reports (CSV / PDF)
+- Budget Tracking
+- Recurring Expenses
+- Charts & Analytics
